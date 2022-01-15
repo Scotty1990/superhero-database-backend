@@ -1,0 +1,15 @@
+{% load static %}
+<html>
+  <head>
+    <title>Supes</title>
+    <link rel="stylesheet" href="{% static 'css/superhero_database_app.css' %}" />
+  </head>
+  <body>
+    <h1>Supes</h1>
+    <nav>
+      <a href="/villains">Villains</a>
+      <a href="/">Heroes</a>
+    </nav>
+    {% block content %} {% endblock %}
+  </body>
+</html>

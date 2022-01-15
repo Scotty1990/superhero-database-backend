@@ -1,0 +1,10 @@
+<a href="/">Heroes</a>
+<h2>{{ superhero.name }} <a href="{% url 'superhero_edit' pk=superhero.pk %}">(edit)</a></h2>
+<h4>{{ superhero.creators }}</h4>
+
+<img src="{{ superhero.image_url }}" alt="" class="super-photo" />
+
+<h3>Powers</h3>
+{{ superhero.powers }}
+
+<a href="{% url 'superhero_delete' pk=superhero.pk %}">Delete</a>

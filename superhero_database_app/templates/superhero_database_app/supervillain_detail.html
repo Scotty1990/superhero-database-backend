@@ -1,0 +1,10 @@
+<a href="/villains">Villains</a>
+<h2>{{ supervillain.name }} <a href="{% url 'supervillain_edit' pk=supervillain.pk %}">(edit)</a></h2>
+<h4>{{ supervillain.creators }}</h4>
+
+<img src="{{ supervillain.image_url }}" alt="" class="super-photo" />
+
+<h3>Powers</h3>
+{{ supervillain.powers }}
+
+<a href="{% url 'supervillain_delete' pk=supervillain.pk %}">Delete</a>
