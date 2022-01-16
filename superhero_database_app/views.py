@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .models import SuperVillain, SuperHero
-from .forms import SuperHeroForm, SuperVillainForm
+from .models import SuperVillain, SuperHero, SuperHeroPost, SuperVillainPost
+from .forms import SuperHeroForm, SuperVillainForm, SuperHeroPostForm, SuperVillainPostForm
 
 # Create your views here.
 
@@ -70,3 +70,38 @@ def supervillain_delete(request, pk):
     SuperVillain.objects.get(pk=pk).delete()
     return redirect('supervillain_list')
 
+def superhero_post_list(request):
+    superhero_posts = SuperHeroPost.objects.all()
+    return render(request, 'superhero_database_app/superhero_post_list.html', {'superhero_posts': superhero_posts})
+
+def supervillain_post_list(request):
+    supervillain_posts = SuperVillainPost.objects.all()
+    return render(request, 'superhero_database_app/supervillain_post_list.html', {'supervillain_posts': supervillain_posts})
+
+def superhero_post_detail(request, pk):
+    superhero_post = SuperHeroPost.objects.get(pk=pk)
+    return render(request, 'superhero_database_app/superhero_post_detail.html', {'superhero_posts_detail': superhero_post})
+
+def supervillain_post_detail(request, pk):
+    supervillain_post = SuperVillainPost.objects.get(pk=pk)
+    return render(request, 'superhero_database_app/supervillain_post_detail.html', {'supervillain_posts_detail': supervillain_post})
+
+def superhero_post_create(request):
+    if request.method == 'POST':
+        form = SuperHeroPostForm(request.POST)
+        if form.is_valid():
+            superhero_post = form.save()
+            return redirect('superhero_post_detail', pk=superhero_post.pk)
+    else:
+        form = SuperHeroPostForm()
+    return render(request, 'superhero_database_app/superhero_post_form.html', {'form': form})
+
+def supervillain_post_create(request):
+    if request.method == 'POST':
+        form = SuperVillainPostForm(request.POST)
+        if form.is_valid():
+            supervillain_post = form.save()
+            return redirect('supervillain_post_detail', pk=supervillain_post.pk)
+    else:
+        form = SuperVillainPostForm()
+    return render(request, 'superhero_database_app/supervillain_post_form.html', {'form': form})

@@ -36,4 +36,37 @@ class SuperVillain(models.Model):
 
     def __str__(self):
         return self.name
-    
+
+class SuperHeroPost(models.Model):
+    superhero = models.ForeignKey(SuperHero, on_delete=models.CASCADE, related_name='superhero_posts')
+    title = models.CharField(max_length=100, default='no title')
+    author = models.CharField(max_length=100, default='no author')
+    body = models.TextField() 
+
+    def __str__(self):
+        return self.title
+
+class SuperVillainPost(models.Model):
+    supervillain = models.ForeignKey(SuperVillain, on_delete=models.CASCADE, related_name='supervillain_posts')
+    title = models.CharField(max_length=100, default='no title')
+    author = models.CharField(max_length=100, default='no author')
+    body = models.TextField() 
+
+    def __str__(self):
+        return self.title
+
+class SuperHeroComment(models.Model):
+    superhero_post = models.ForeignKey(SuperHeroPost, on_delete=models.CASCADE, related_name='superhero_comments')
+    author = models.CharField(max_length=100, default='no author')
+    body = models.TextField() 
+
+    def __str__(self):
+        return self.author
+
+class SuperVillainComment(models.Model):
+    supervillain_post = models.ForeignKey(SuperVillainPost, on_delete=models.CASCADE, related_name='supervillain_comments')
+    author = models.CharField(max_length=100, default='no author')
+    body = models.TextField() 
+
+    def __str__(self):
+        return self.author

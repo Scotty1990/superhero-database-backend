@@ -1,0 +1,15 @@
+{% extends 'superhero_database_app/base.html' %} 
+{% block content %}
+<h2>{{ this.title }} <a href="">(edit)</a></h2>
+<h4>{{ supervillain_post.author }}</h4>
+<p>{{ supervillain_post.body }}</p>
+
+<!-- <ul>
+  {% for comment in comments %}
+  <li>
+    <a href="{% url 'supervillain_comment_detail' pk=supervillain_post.pk %}">{{ supervillain_comment.author }}</a>
+    <p>{{ supervillain_comment.body }}</p>
+  </li>
+  {% endfor %}
+</ul> -->
+{% endblock %}
