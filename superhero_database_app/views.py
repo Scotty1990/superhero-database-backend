@@ -80,11 +80,11 @@ def supervillain_post_list(request):
 
 def superhero_post_detail(request, pk):
     superhero_post = SuperHeroPost.objects.get(pk=pk)
-    return render(request, 'superhero_database_app/superhero_post_detail.html', {'superhero_posts_detail': superhero_post})
+    return render(request, 'superhero_database_app/superhero_post_detail.html', {'superhero_post': superhero_post})
 
 def supervillain_post_detail(request, pk):
     supervillain_post = SuperVillainPost.objects.get(pk=pk)
-    return render(request, 'superhero_database_app/supervillain_post_detail.html', {'supervillain_posts_detail': supervillain_post})
+    return render(request, 'superhero_database_app/supervillain_post_detail.html', {'supervillain_post': supervillain_post})
 
 def superhero_post_create(request):
     if request.method == 'POST':
@@ -105,3 +105,33 @@ def supervillain_post_create(request):
     else:
         form = SuperVillainPostForm()
     return render(request, 'superhero_database_app/supervillain_post_form.html', {'form': form})
+
+def superhero_post_edit(request, pk):
+    superhero_post = SuperHeroPost.objects.get(pk=pk)
+    if request.method == "POST":
+        form = SuperHeroPostForm(request.POST, instance=superhero_post)
+        if form.is_valid():
+            superhero_post = form.save()
+            return redirect('superhero_post_detail', pk=superhero_post.pk)
+    else:
+        form = SuperHeroPostForm(instance=superhero_post)
+    return render(request, 'superhero_database_app/superhero_post_form.html', {'form': form})
+
+def supervillain_post_edit(request, pk):
+    supervillain_post = SuperVillainPost.objects.get(pk=pk)
+    if request.method == "POST":
+        form = SuperVillainPostForm(request.POST, instance=supervillain_post)
+        if form.is_valid():
+            supervillain_post = form.save()
+            return redirect('supervillain_post_detail', pk=supervillain_post.pk)
+    else:
+        form = SuperVillainPostForm(instance=supervillain_post)
+    return render(request, 'superhero_database_app/supervillain_post_form.html', {'form': form})
+
+def superhero_post_delete(request, pk):
+    SuperHeroPost.objects.get(pk=pk).delete()
+    return redirect('superhero_post_list')
+
+def supervillain_post_delete(request, pk):
+    SuperVillainPost.objects.get(pk=pk).delete()
+    return redirect('supervillain_post_list')

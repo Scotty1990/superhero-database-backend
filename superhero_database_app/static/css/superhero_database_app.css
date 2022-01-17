@@ -66,7 +66,7 @@ body {
     color: #ffffff;
   }
   
-  a.delete {
+  .delete-button {
     background-color: red;
   }
   

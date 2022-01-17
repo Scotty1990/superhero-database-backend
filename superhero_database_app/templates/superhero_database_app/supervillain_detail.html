@@ -1,7 +1,6 @@
 {% extends 'superhero_database_app/base.html' %} 
 
 {% block content %}
-<a href="/villains">Villains</a>
 <h2>{{ supervillain.name }} <a href="{% url 'supervillain_edit' pk=supervillain.pk %}">(edit)</a></h2>
 <h4>{{ supervillain.creators }}</h4>
 

@@ -18,4 +18,8 @@ urlpatterns = [
     path('supervillainposts/<int:pk>', views.supervillain_post_detail, name='supervillain_post_detail'),
     path('superheroposts/new', views.superhero_post_create, name='superhero_post_create'),
     path('supervillainposts/new', views.supervillain_post_create, name='supervillain_post_create'),
+    path('superheroposts/<int:pk>/edit', views.superhero_post_edit, name='superhero_post_edit'),
+    path('supervillainposts/<int:pk>/edit', views.supervillain_post_edit, name='supervillain_post_edit'),
+    path('superheroposts/<int:pk>/delete', views.superhero_post_delete, name='superhero_post_delete'),
+    path('supervillainposts/<int:pk>/delete', views.supervillain_post_delete, name='supervillain_post_delete'),
 ]

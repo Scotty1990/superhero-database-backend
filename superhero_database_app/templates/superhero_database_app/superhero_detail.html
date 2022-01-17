@@ -1,7 +1,6 @@
 {% extends 'superhero_database_app/base.html' %} 
 
 {% block content %}
-<a href="/">Heroes</a>
 <h2>{{ superhero.name }} <a href="{% url 'superhero_edit' pk=superhero.pk %}">(edit)</a></h2>
 <h4>{{ superhero.creators }}</h4>
 
@@ -16,7 +15,8 @@
 <ul>
     {% for post in superhero.superhero_posts.all %}
     <li>
-        <a href="{% url 'superhero_post_detail' pk=post.pk %}">{{ post.title }}-{{ post.author }}</a>
+        <a class="delete-button" href="{% url 'superhero_post_detail' pk=post.pk %}">{{ post.title }}-{{ post.author }}</a>
+        <p>{{ post.body }}</p>
     </li>
     {% endfor %}
 </ul>

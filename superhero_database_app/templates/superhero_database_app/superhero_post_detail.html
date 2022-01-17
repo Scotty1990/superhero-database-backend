@@ -1,15 +1,8 @@
 {% extends 'superhero_database_app/base.html' %} 
 {% block content %}
-<h2>{{ post.title }} <a href="">(edit)</a></h2>
-<h4>{{ post.author }}</h4>
-<p>{{ post.body }}</p>
-<h2>Comments <a href="{% url 'superhero_comment_create' %}">(+)</a></h2>
-<ul>
-  {% for comment in comments %}
-  <li>
-    <a href="{% url 'superhero_comment_detail' pk=superhero_post.pk %}">{{ superhero_comment.author }}</a>
-    <p>{{ superhero_comment.body }}</p>
-  </li>
-  {% endfor %}
-</ul>
+<h2>{{ superhero_post.title }} <a href="{% url 'superhero_post_edit' pk=superhero_post.pk %}">(edit)</a></h2>
+<h4>{{ superhero_post.author }}</h4>
+<p>{{ superhero_post.body }}</p>
+<a href="{% url 'superhero_post_delete' pk=superhero_post.pk %}">Delete</a>
+
 {% endblock %}

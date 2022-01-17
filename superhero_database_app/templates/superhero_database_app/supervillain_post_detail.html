@@ -1,9 +1,9 @@
 {% extends 'superhero_database_app/base.html' %} 
 {% block content %}
-<h2>{{ this.title }} <a href="">(edit)</a></h2>
+<h2>{{ supervillain_post.title }} <a href="{% url 'supervillain_post_edit' pk=supervillain_post.pk %}">(edit)</a></h2>
 <h4>{{ supervillain_post.author }}</h4>
 <p>{{ supervillain_post.body }}</p>
-
+<a href="{% url 'supervillain_post_delete' pk=supervillain_post.pk %}">Delete</a>
 <!-- <ul>
   {% for comment in comments %}
   <li>
