@@ -9,7 +9,7 @@ class SuperHeroSerializer(serializers.HyperlinkedModelSerializer):
     # )
     class Meta:
         model = SuperHero
-        fields = ('name', 'creators', 'alter_ego', 'place_of_residence', 'description', 'origin_story', 'career', 'image_url', 'aliases', 'powers', 'comics', 'movies', 'other_forms_of_media')
+        fields = ('id', 'name', 'creators', 'alter_ego', 'place_of_residence', 'description', 'origin_story', 'career', 'image_url', 'aliases', 'powers', 'comics', 'movies', 'other_forms_of_media')
 
 class SuperVillainSerializer(serializers.HyperlinkedModelSerializer):
     # supervillain_posts = serializers.HyperlinkedRelatedField(
@@ -19,7 +19,7 @@ class SuperVillainSerializer(serializers.HyperlinkedModelSerializer):
     # )
     class Meta:
         model = SuperVillain
-        fields = ('name', 'creators', 'alter_ego', 'place_of_residence', 'description', 'origin_story', 'career', 'image_url', 'aliases', 'powers', 'comics', 'movies', 'other_forms_of_media')
+        fields = ('id', 'name', 'creators', 'alter_ego', 'place_of_residence', 'description', 'origin_story', 'career', 'image_url', 'aliases', 'powers', 'comics', 'movies', 'other_forms_of_media')
 
 # class SuperVillainSerializer(serializers.HyperlinkedModelSerializer):
 #     class Meta:
