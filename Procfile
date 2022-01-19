@@ -1,1 +1,1 @@
-web: gunicorn superhero-backend-new.wsgi
+web: gunicorn superhero_app.wsgi
