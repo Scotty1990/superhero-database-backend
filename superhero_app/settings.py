@@ -9,6 +9,8 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
+import os
+import dj_database_url
 
 from pathlib import Path
 
@@ -20,12 +22,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-$(1h8#g7qd1&2(1jh_asu7uis=hkhn0i^mmssk$&izvrrd8q2j'
+SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = True if os.environ['MODE'] == 'dev' else False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -39,11 +41,23 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'superhero_database_app',
     'django_extensions',
+    'rest_framework',
+    'corsheaders',
 ]
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -51,7 +65,16 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# this was added tuesday
+
+CORS_ORIGIN_ALLOW_ALL = True
+# CORS_ORIGIN_WHITELIST = (
+#   'http://localhost:8000',
+# )
+
+# end of added stuff
 ROOT_URLCONF = 'superhero_app.urls'
+
 
 TEMPLATES = [
     {
@@ -76,13 +99,14 @@ WSGI_APPLICATION = 'superhero_app.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'superhero_database_app',
-        'USER': 'superherousernew',
-        'PASSWORD': 'superhero_database_app',
-        'HOST': 'localhost'
-    }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': 'superhero_database_app',
+    #     'USER': 'superherousernew',
+    #     'PASSWORD': 'superhero_database_app',
+    #     'HOST': 'localhost'
+    # }
+    'default': dj_database_url.config(conn_max_age=600)
 }
 
 
@@ -122,7 +146,11 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+STATIC_ROOT=os.path.join(BASE_DIR, "static/")
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_REDIRECT_URL = "/"

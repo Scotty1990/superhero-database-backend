@@ -1,0 +1,1 @@
+web: gunicorn superhero-backend-new.wsgi
